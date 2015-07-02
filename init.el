@@ -101,7 +101,8 @@
 ;;;; Misc
 
 ;;; Fix scrolling and bells
-(global-set-key [wheel-right] 'ignore)
+(global-set-key [wheel-right] 'ignore)	; This is because wheel-right
+					; takes me off screen too easily
 (global-set-key [wheel-left] 'scroll-right)
 
 (defun my-bell-function ()
@@ -129,17 +130,12 @@
 
 ;;; Better Scrolling
 (setq redisplay-dont-pause t
-      scroll-margin 1
+      scroll-margin 7
       scroll-step 1
-      scroll-conservatively 10000
-      scroll-preserve-screen-position 1)
-
-(setq scroll-conservatively 10)
-(setq scroll-margin 7)
-
-(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ; one line at a time
-(setq mouse-wheel-progressive-speed nil)            ; don't accelerate
-					; scrolling
+      scroll-conservatively 10
+      scroll-preserve-screen-position 1
+      mouse-wheel-scroll-amount '(1 ((shift) . 1))  ; one line at a time
+      mouse-wheel-progressive-speed nil)            ; don't accelerate
 
 ;;; C Code
 (setq c-default-style "linux"
