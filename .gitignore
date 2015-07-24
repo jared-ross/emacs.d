@@ -38,3 +38,6 @@ tramp
 
 # cask packages
 .cask/
+/.smex-items
+/games/snake-scores
+/bookmarks
