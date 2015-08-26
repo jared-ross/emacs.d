@@ -20,11 +20,15 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")
+ '(cdlatex-paired-parens "$")
  '(custom-safe-themes
    (quote
-    ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(menu-bar-mode nil)
- '(org-agenda-files (quote ("~/.org/tasks.org" "~/.org//notes.org")))
+    ("ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+ '(nil nil t)
+ '(org-agenda-files
+   (quote
+    ("~/.org/debating.org" "~/Google Drive/University/2015/S2/MTH2032/mth2032.org" "~/Documents/1991-dandenong/1991-dandenong.org" "~/Google Drive/University/2015/S2/MTH2222/mth2222.org" "~/Google Drive/University/2015/S2/SCI2010/sci-notes.org" "~/Dropbox/.org/emacs.org" "~/.org/tasks.org" "~/.org//notes.org")))
  '(package-archives
    (quote
     (("melpa" . "http://melpa.org/packages/")
@@ -49,12 +53,19 @@
 	    (add-hook 'haskell-mode-hook 'haskell-indentation-mode)
 	    (add-hook 'haskell-mode-hook 'interactive-haskell-mode)))
 
-;;; Amber theme
+;;; Solarized theme
+;; (use-package solarized-theme
+;;   :config (progn
+;;	    (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+;;	    (load-theme 'solarized t))
+;;   :ensure t)
+
+;;; Ample theme
 (use-package ample-theme
   :config (progn (load-theme 'ample t t)
-	       (load-theme 'ample-flat t t)
-	       (load-theme 'ample-light t t)
-	       (enable-theme 'ample-flat))
+		 (load-theme 'ample-flat t t)
+		 (load-theme 'ample-light t t)
+		 (enable-theme 'ample-flat))
   :ensure t)
 
 ;;; Winner Mode
@@ -63,7 +74,10 @@
 
 ;;; Undo Tree
 (use-package undo-tree
-  :config (undo-tree-mode t)
+  :config (progn
+	    (global-undo-tree-mode)
+	    (setq undo-tree-visualizer-timestamps t
+		  undo-tree-visualizer-diff t))
   :diminish undo-tree-mode
   :ensure t)
 
@@ -72,26 +86,29 @@
   :if 'ample-theme
   :config (progn
 	    ;; Evil Mode Switcher
+	    (setq evil-default-state 'emacs)
+
 	    (defun toggle-evil-mode ()
 	      (interactive)
-	      (if (not evil-mode)
+	      (let ((yas-global-mode-hook nil))
+		(if (evil-emacs-state-p)
+		    (progn
+		      (evil-normal-state)
+		      (enable-theme 'ample))
 		  (progn
-		    (evil-mode 1)
-		    (enable-theme 'ample))
-		(progn
-		  (evil-mode 0)
-		  (enable-theme 'ample-flat))))
+		    (evil-emacs-state)
+		    (enable-theme 'ample-flat)))))
 	    (global-set-key (kbd "<C-escape>") 'toggle-evil-mode)
 
 	    ;; Redefining Keys
 	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
 	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
 	    (mapc (lambda (state)	; For some reason this only works with mapcar
-			(evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
-			(evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
-			(evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
-			(evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
-			(evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
+			;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
+			;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
+			;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
+			;; (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
+			;; (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
 			(evil-declare-key state global-map (kbd "C-w") 'evil-delete)
 			(evil-declare-key state global-map (kbd "C-y") 'yank)
 			(evil-declare-key state global-map (kbd "C-k") 'kill-line))
@@ -117,32 +134,19 @@
   :ensure t
   :pin melpa-stable)
 
-;; ;;; Flx
-;; (use-package flx
-;;   :ensure t)
-
-;; (use-package flx-ido
-;;   :if 'flx
-;;   :config (progn
-;;	   (ido-mode 1)
-;;	   (ido-everywhere 1)
-;;	   (flx-ido-mode 1)
-;;	   ;; disable ido faces to see flx highlights.
-;;	   (setq ido-enable-flex-matching t)
-;;	   (setq ido-use-faces nil))
-;;   :ensure t)
-
 ;;; Helm
 (use-package helm
-  :bind (("M-x" . helm-M-x)
-	 ("C-c h" . helm-command-prefix))
-  :ensure t)
-
-(use-package helm-config
-  :if 'helm
   :config (progn
 	    (require 'helm-config)
-	    (setq helm-split-window-in-side-p           t
+	    (setq helm-candidate-number-limit           100
+		  helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+		  helm-input-idle-delay 0.01  ; this actually updates things
+					; reeeelatively quickly.
+		  helm-yas-display-key-on-candidate t
+		  helm-quick-update t
+		  helm-M-x-requires-pattern nil
+		  helm-ff-skip-boring-files             t
+		  helm-split-window-in-side-p           t
 		  helm-move-to-line-cycle-in-source     t
 		  helm-ff-search-library-in-sexp        t
 		  helm-scroll-amount                    8
@@ -160,16 +164,92 @@
 	    (when (executable-find "curl")
 	      (setq helm-google-suggest-use-curl-p t))
 
-	    (helm-mode t)))
+	    (helm-mode t))
+  :bind (("C-c h" . helm-mini)
+	 ("C-h a" . helm-apropos)
+	 ("C-x C-b" . helm-buffers-list)
+	 ("C-x b" . helm-buffers-list)
+	 ("M-y" . helm-show-kill-ring)
+	 ("M-x" . helm-M-x)
+	 ("C-x c o" . helm-occur)
+	 ("C-x c s" . helm-swoop)
+	 ("C-x c y" . helm-yas-complete)
+	 ("C-x c Y" . helm-yas-create-snippet-on-region)
+	 ("C-x c b" . my/helm-do-grep-book-notes)
+	 ("C-x c SPC" . helm-all-mark-rings))
+  :diminish helm-mode
+  :ensure t)
 
 (use-package helm-dash
-  :if 'helm-config
-  :config '()
+  :if 'helm
   :ensure t)
+
+(use-package bookmark+
+  :config (progn
+	    (setq desktop-globals-to-save
+		  (append '((comint-input-ring . 50)
+			    (compile-history . 30)
+			    desktop-missing-file-warning
+			    (dired-regexp-history . 20)
+			    (extended-command-history . 30)
+			    (face-name-history . 20)
+			    (file-name-history . 100)
+			    (grep-find-history . 30)
+			    (grep-history . 30)
+			    (ido-buffer-history . 100)
+			    (ido-last-directory-list . 100)
+			    (ido-work-directory-list . 100)
+			    (ido-work-file-list . 100)
+			    (magit-read-rev-history . 50)
+			    (minibuffer-history . 50)
+			    (org-clock-history . 50)
+			    (org-refile-history . 50)
+			    (org-tags-history . 50)
+			    (query-replace-history . 60)
+			    (read-expression-history . 60)
+			    (regexp-history . 60)
+			    (regexp-search-ring . 20)
+			    register-alist
+			    (search-ring . 20)
+			    (shell-command-history . 50)
+			    tags-file-name
+			    tags-table-list))))
+  :ensure t)
+
+(use-package smart-mode-line
+  :config (progn
+	    (setq sml/theme 'dark)
+	    (setq-default
+	     mode-line-format
+	     '("%e"
+	       mode-line-front-space
+	       mode-line-mule-info
+	       mode-line-client
+	       mode-line-modified
+	       mode-line-remote
+	       mode-line-frame-identification
+	       mode-line-buffer-identification
+	       "   "
+	       mode-line-position
+	       (vc-mode vc-mode)
+	       "  "
+	       mode-line-modes
+	       mode-line-misc-info
+	       mode-line-end-spaces))
+	    (sml/setup))
+  :ensure t)
+
+;;; Guide Key - Show help on delay of key input
+(use-package guide-key
+  :config (progn
+	    (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+	    (guide-key-mode 1))
+  :ensure t
+  :diminish guide-key-mode)
 
 ;;; Fly Check
 (use-package flycheck
-  :config (add-hook 'after-init-hook #'global-flycheck-mode)
+  :config (add-hook 'programming-mode-hook #'flycheck-mode)
   :ensure t)
 
 ;;; Agressive Indent
@@ -180,8 +260,20 @@
 (use-package tex-site
   :config (progn
 	    (add-hook 'TeX-mode-hook
-		      (lambda () (TeX-fold-mode 1))))
+		      (lambda () (TeX-fold-mode 1)))
+	    (setq TeX-auto-save t
+		  TeX-parse-self t)
+	    (setq-default TeX-master nil)
+	    (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
   :ensure auctex)
+
+(use-package cdlatex
+  :config (progn
+	    (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
+	    (setq cdlatex-math-symbol-alist '((?- ("\\cap" "\\leftrightarrow" "\\longleftrightarrow"))
+					      (?p ("\\pi" "\\Pr(?)" "\\varpi")))))
+  :ensure t)
+
 
 ;;; Whitespace Cleanup
 (use-package whitespace-cleanup-mode
@@ -200,14 +292,21 @@
 (use-package org
   :config (progn
 	    (setq org-directory "~/.org/")
-	    (let ((notes (concat org-directory "/notes.org")))
-	      (setq org-default-notes-file notes
-		    org-agenda-files (list notes)))
+	    ;; (let ((notes (concat org-directory "/notes.org")))
+	    ;;   (setq org-default-notes-file notes
+	    ;;	    org-agenda-files (list notes)))
 	    (setq org-log-done 'time
 		  org-todo-keywords
-		  '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d!)" "CANCELED(c@)"))
+		  '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d@!)" "CANCELED(c@!)")
+		    (sequence "MAYBE(m)" "|" "CANCELED(c@!)"))
 		  org-startup-indented t
 		  org-special-ctrl-a/e t
+		  ;; Refiling
+		  org-refile-targets '((org-agenda-files :maxlevel . 9))
+		  org-outline-path-complete-in-steps nil
+		  org-refile-use-outline-path t
+		  org-refile-allow-creating-parent-nodes (quote confirm)
+		  ;; Capturing
 		  org-capture-templates
 		  '(("t" "Todo" entry
 		     (file+headline "~/.org/tasks.org" "Tasks")
@@ -215,10 +314,19 @@
 		    ("T" "Referenced Todo" entry
 		     (file+headline "~/.org/tasks.org" "Tasks")
 		     "* TODO %?\n  %i\n  %a")
-		    ("b" "Buy something" entry
+		    ("c" "Consume" entry
+		     (file+headline "~/.org/tasks.org" "Consume")
+		     "* MAYBE %?")
+		    ("b" "Buy" entry
 		     (file+headline "~/.org/tasks.org" "Shopping")
 		     "* TODO %?")
-		    ("e" "Emacs useful thing" entry
+		    ("p" "Projects" entry
+		     (file+headline "~/.org/notes.org" "Projects")
+		     "* MAYBE %?")
+		    ("n" "Notes" entry
+		     (file+headline "~/.org/notes.org" "Unsorted")
+		     "* %?")
+		    ("e" "Emacs note" entry
 		     (file+headline "~/.org/emacs.org" "Captured")
 		     "* %?")
 		    ("j" "Journal" entry (file+datetree "~/.org/journal.org")
@@ -263,16 +371,44 @@
 
 ;;; YaSnippet
 (use-package yasnippet
-;;  :config (progn (add-hook 'prog-mode-hook #'yas-minor-mode))
+  :config (progn (yas-global-mode 1))
   :ensure t)
 
-;;; EShell
+;;;; Misc
 
+;;; Backing up
+(setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs.d/auto-save-list/" t)))
+
+;;; History
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+	search-ring
+	regexp-search-ring))
+
+;;; Sentences end with a single space
+(setq sentence-end-double-space nil)
+
+;;; Killing Text - From https://github.com/itsjeyd/emacs-config/blob/emacs24/init.el
+(defadvice kill-region (before slick-cut activate compile)
+  "When called interactively with no active region, kill a single line instead."
+  (interactive
+    (if mark-active (list (region-beginning) (region-end))
+      (list (line-beginning-position)
+	(line-beginning-position 2)))))
+
+;;; EShell
 (setq eshell-where-to-jump 'begin)
 (setq eshell-review-quick-commands nil)
 (setq eshell-smart-space-goes-to-end t)
-
-;;;; Misc
 
 ;;; Fix scrolling and bells
 (global-set-key [wheel-right] 'ignore)	; This is because wheel-right
@@ -345,7 +481,7 @@
 (setq ispell-program-name "aspell")
 (setq ispell-list-command "list")
 
-(global-set-key [M-down-mouse-1] 'flyspell-correct-word)
+(add-hook 'flyspell-mode-hook (lambda () (local-set-key [M-down-mouse-1] 'flyspell-correct-word)))
 
 ;;; OSX Tricks
 
@@ -353,9 +489,16 @@
 (setq locate-command "mdfind")
 
 ;;; init.el ends here
+;;(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ ;;'(region ((t (:background "selectedTextBackgroundColor")))))
+(put 'narrow-to-region 'disabled nil)
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(region ((t (:background "selectedTextBackgroundColor")))))
+ )
