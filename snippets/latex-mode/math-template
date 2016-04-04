@@ -1,0 +1,69 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: math-template
+# key: math-template
+# binding: direct-keybinding
+# --
+
+\documentclass[11pt, oneside]{amsart}
+\title{$1}
+
+%%% Packages
+
+%% Typography
+\usepackage{graphicx, hyperref, geometry, sidecap, enumitem, framed, float, setspace}
+\usepackage[all]{nowidow} 
+% \usepackage[parfill]{parskip} % Newline paras, instead of indent.
+
+%% Math
+\usepackage{amssymb, mathtools, xfrac, cool, cancel, gauss}
+
+%% Misc
+\usepackage{todonotes}
+
+%%% General Setup
+
+%% Page and typographical Setup
+\geometry{a4paper}
+\singlespacing{}
+
+%% Graphics Setup
+\graphicspath{{./images/}}
+
+%%% Math Setup
+
+%% Math Typography Setup
+\mathtoolsset{showonlyrefs}
+
+%% Wrapping operations
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\innerp{\langle}{\rangle}
+
+%% Operators
+\DeclareMathOperator{\diag}{diag} \DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\nullSpace}{null}
+\DeclareMathOperator{\spanVectors}{span}
+
+%% Globals
+\def\reals{\mathbb{R}}
+\def\rationals{\mathbb{Q}}
+\def\integers{\mathbb{Z}}
+\def\naturals{\mathbb{N}}
+\def\units{\text{units}}
+
+%% Environments
+\newtheorem{thm}{Theorem}[subsection]
+\newtheorem{lem}[thm]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{example}[thm]{Example}
+
+%%% The Document
+
+\begin{document}
+\maketitle
+
+$0
+\end{document}

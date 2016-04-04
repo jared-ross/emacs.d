@@ -1,6 +1,7 @@
 /auto-save-list/
 /elpa/
 /url/
+/savehist
 
 /local.el
 /private.el

@@ -7,7 +7,7 @@
 ;;;; Code:
 
 ;;; Setting the path
-(let* ((extra '("/usr/texbin" "/usr/local/bin" "/Applications/ghc-7.8.4.app/Contents/bin"))
+(let* ((extra '("/usr/local/texbin" "/usr/local/bin" "/Applications/ghc-7.8.4.app/Contents/bin"))
        (extra-path-form (mapconcat (lambda (x) (concat ":" x)) extra "")))
   (setenv "PATH" (concat (getenv "PATH") extra-path-form))
   (setq exec-path (append exec-path extra)))
@@ -15,6 +15,7 @@
 ;;;; Packages
 
 ;;; Set sources
+;; TODO Move this into custom.el and change custom-file to suit
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -25,10 +26,12 @@
  '(custom-safe-themes
    (quote
     ("ffe39e540469ef05808ab4b75055cc81266875fa4a0d9e89c2fec1da7a6354f3" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+ '(mac-option-modifier (quote meta))
+ '(mac-right-option-modifier (quote hyper))
  '(nil nil t)
  '(org-agenda-files
    (quote
-    ("~/.org/debating.org" "~/Google Drive/University/2015/S2/MTH2032/mth2032.org" "~/Documents/1991-dandenong/1991-dandenong.org" "~/Google Drive/University/2015/S2/MTH2222/mth2222.org" "~/Google Drive/University/2015/S2/SCI2010/sci-notes.org" "~/Dropbox/.org/emacs.org" "~/.org/tasks.org" "~/.org//notes.org")))
+    ("~/.org/emacs.org" "~/.org/tasks.org" "~/.org/notes.org")))
  '(package-archives
    (quote
     (("melpa" . "http://melpa.org/packages/")
@@ -61,11 +64,17 @@
 ;;   :ensure t)
 
 ;;; Ample theme
-(use-package ample-theme
-  :config (progn (load-theme 'ample t t)
-		 (load-theme 'ample-flat t t)
-		 (load-theme 'ample-light t t)
-		 (enable-theme 'ample-flat))
+;; (use-package ample-theme
+;;   :config (progn (load-theme 'ample t t)
+;;		 (load-theme 'ample-flat t t)
+;;		 (load-theme 'ample-light t t)
+;;		 (enable-theme 'ample-flat))
+;;   :ensure t)
+
+;;; Aurora Theme
+(use-package leuven-theme
+  :config (progn
+	    (load-theme 'leuven t t))
   :ensure t)
 
 ;;; Winner Mode
@@ -82,44 +91,29 @@
   :ensure t)
 
 ;;; Evil Mode
-(use-package evil
-  :if 'ample-theme
-  :config (progn
-	    ;; Evil Mode Switcher
-	    (setq evil-default-state 'emacs)
+;; (use-package evil
+;;   :if 'ample-theme
+;;   :config (progn
+;;	    ;; Redefining Keys
+;;	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
+;;	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
+;;	    (mapc (lambda (state)	; For some reason this only works with mapcar
+;;			;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
+;;			;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
+;;			;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
+;;			;; (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
+;;			;; (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
+;;			(evil-declare-key state global-map (kbd "C-w") 'evil-delete)
+;;			(evil-declare-key state global-map (kbd "C-y") 'yank)
+;;			(evil-declare-key state global-map (kbd "C-k") 'kill-line))
+;;		    '(normal insert visual))
 
-	    (defun toggle-evil-mode ()
-	      (interactive)
-	      (let ((yas-global-mode-hook nil))
-		(if (evil-emacs-state-p)
-		    (progn
-		      (evil-normal-state)
-		      (enable-theme 'ample))
-		  (progn
-		    (evil-emacs-state)
-		    (enable-theme 'ample-flat)))))
-	    (global-set-key (kbd "<C-escape>") 'toggle-evil-mode)
+;;	    (define-key evil-normal-state-map (kbd "q") nil)
 
-	    ;; Redefining Keys
-	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
-	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
-	    (mapc (lambda (state)	; For some reason this only works with mapcar
-			;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
-			;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
-			;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
-			;; (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
-			;; (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
-			(evil-declare-key state global-map (kbd "C-w") 'evil-delete)
-			(evil-declare-key state global-map (kbd "C-y") 'yank)
-			(evil-declare-key state global-map (kbd "C-k") 'kill-line))
-		    '(normal insert visual))
-
-	    (define-key evil-normal-state-map (kbd "q") nil)
-
-	    ;; Fixing up certain states
-					; Not currently working...
-	    (evil-set-initial-state 'MagitPopup 'emacs))
-  :ensure t)
+;;	    ;; Fixing up certain states
+;;					; Not currently working...
+;;	    (evil-set-initial-state 'MagitPopup 'emacs))
+;;   :ensure t)
 
 ;;; Rainbow Delimiters
 (use-package rainbow-delimiters
@@ -216,28 +210,28 @@
 			    tags-table-list))))
   :ensure t)
 
-(use-package smart-mode-line
-  :config (progn
-	    (setq sml/theme 'dark)
-	    (setq-default
-	     mode-line-format
-	     '("%e"
-	       mode-line-front-space
-	       mode-line-mule-info
-	       mode-line-client
-	       mode-line-modified
-	       mode-line-remote
-	       mode-line-frame-identification
-	       mode-line-buffer-identification
-	       "   "
-	       mode-line-position
-	       (vc-mode vc-mode)
-	       "  "
-	       mode-line-modes
-	       mode-line-misc-info
-	       mode-line-end-spaces))
-	    (sml/setup))
-  :ensure t)
+;; (use-package smart-mode-line
+;;   :config (progn
+;;	    (setq sml/theme 'dark)
+;;	    (setq-default
+;;	     mode-line-format
+;;	     '("%e"
+;;	       mode-line-front-space
+;;	       mode-line-mule-info
+;;	       mode-line-client
+;;	       mode-line-modified
+;;	       mode-line-remote
+;;	       mode-line-frame-identification
+;;	       mode-line-buffer-identification
+;;	       "   "
+;;	       mode-line-position
+;;	       (vc-mode vc-mode)
+;;	       "  "
+;;	       mode-line-modes
+;;	       mode-line-misc-info
+;;	       mode-line-end-spaces))
+;;	    (sml/setup))
+;;   :ensure t)
 
 ;;; Guide Key - Show help on delay of key input
 (use-package guide-key
@@ -348,9 +342,9 @@
 ;;   :diminish smooth-scroll-mode
 ;;   :ensure t)
 
-(use-package tea-time
-  :config (setq tea-time-sound-command "afplay %s")
-  :ensure t)
+;; (use-package tea-time
+;;   :config (setq tea-time-sound-command "afplay %s")
+;;   :ensure t)
 
 ;;; Clojure
 (use-package clojure-mode
@@ -442,14 +436,14 @@
 ;;; Dealing with parens
 (show-paren-mode 1)
 
-;;; Better Scrolling
-(setq redisplay-dont-pause t
-      scroll-margin 7
-      scroll-step 1
-      scroll-conservatively 10
-      scroll-preserve-screen-position 1
-      mouse-wheel-scroll-amount '(1 ((shift) . 1))  ; one line at a time
-      mouse-wheel-progressive-speed nil)            ; don't accelerate
+;;; Better Scrolling - This doesn't work well I am just using the emacs-mac-port
+;; (setq redisplay-dont-pause t
+;;       scroll-margin 7
+;;       scroll-step 1
+;;       scroll-conservatively 10
+;;       scroll-preserve-screen-position 1
+;;       mouse-wheel-scroll-amount '(1 ((shift) . 1))  ; one line at a time
+;;       mouse-wheel-progressive-speed nil)            ; don't accelerate
 
 ;;; C Code
 (setq c-default-style "linux"
