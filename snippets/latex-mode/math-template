@@ -6,16 +6,17 @@
 
 \documentclass[11pt, oneside]{amsart}
 \title{$1}
+%\author{Jared Ross, 260 273 72 }
 
 %%% Packages
 
 %% Typography
-\usepackage{graphicx, hyperref, geometry, sidecap, enumitem, framed, float, setspace}
+\usepackage{graphicx, hyperref, geometry, sidecap, enumitem, framed, float, setspace, comment}
 \usepackage[all]{nowidow} 
 % \usepackage[parfill]{parskip} % Newline paras, instead of indent.
 
 %% Math
-\usepackage{amssymb, mathtools, xfrac, cool, cancel, gauss}
+\usepackage{amssymb, mathtools, xfrac, cool, cancel, gauss, permute}
 
 %% Misc
 \usepackage{todonotes}
@@ -25,6 +26,8 @@
 %% Page and typographical Setup
 \geometry{a4paper}
 \singlespacing{}
+%\renewcommand{\thesubsection}{\thesection\enspace\alph{subsection}}	% make subsections enumerated with letters
+%\renewcommand{\thesubsubsection}{\thesubsection\enspace\roman{subsubsection}}
 
 %% Graphics Setup
 \graphicspath{{./images/}}
