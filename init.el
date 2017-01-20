@@ -91,29 +91,28 @@
   :ensure t)
 
 ;;; Evil Mode
-;; (use-package evil
-;;   :if 'ample-theme
-;;   :config (progn
-;;	    ;; Redefining Keys
-;;	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
-;;	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
-;;	    (mapc (lambda (state)	; For some reason this only works with mapcar
-;;			;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
-;;			;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
-;;			;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
-;;			;; (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
-;;			;; (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
-;;			(evil-declare-key state global-map (kbd "C-w") 'evil-delete)
-;;			(evil-declare-key state global-map (kbd "C-y") 'yank)
-;;			(evil-declare-key state global-map (kbd "C-k") 'kill-line))
-;;		    '(normal insert visual))
+(use-package evil
+  :config (progn
+	    ;; Redefining Keys
+	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
+	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
+	    (mapc (lambda (state)	; For some reason this only works with mapcar
+		    ;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
+		    ;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
+		    ;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
+		    ;; (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
+		    ;; (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
+		    (evil-declare-key state global-map (kbd "C-w") 'evil-delete)
+		    (evil-declare-key state global-map (kbd "C-y") 'yank)
+		    (evil-declare-key state global-map (kbd "C-k") 'kill-line))
+		  '(normal insert visual))
 
-;;	    (define-key evil-normal-state-map (kbd "q") nil)
+	    (define-key evil-normal-state-map (kbd "q") nil)
 
-;;	    ;; Fixing up certain states
-;;					; Not currently working...
-;;	    (evil-set-initial-state 'MagitPopup 'emacs))
-;;   :ensure t)
+	    ;; Fixing up certain states
+					; Not currently working...
+	    (evil-set-initial-state 'MagitPopup 'emacs))
+  :ensure t)
 
 ;;; Rainbow Delimiters
 (use-package rainbow-delimiters
