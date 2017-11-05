@@ -110,8 +110,9 @@
 	    (define-key evil-normal-state-map (kbd "q") nil)
 
 	    ;; Fixing up certain states
-					; Not currently working...
-	    (evil-set-initial-state 'MagitPopup 'emacs))
+	    (evil-set-initial-state 'magit-mode 'emacs)
+	    (evil-set-initial-state 'magit-popup-mode 'emacs)
+	    (evil-set-initial-state 'org-mode 'emacs))
   :ensure t)
 
 ;;; Rainbow Delimiters
