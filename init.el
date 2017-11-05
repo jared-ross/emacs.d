@@ -158,7 +158,8 @@
 	      (setq helm-google-suggest-use-curl-p t))
 
 	    (helm-mode t))
-  :bind (("C-c h" . helm-mini)
+  :bind (("C-x C-f" . helm-find-files)
+	 ("C-c h" . helm-mini)
 	 ("C-h a" . helm-apropos)
 	 ("C-x C-b" . helm-buffers-list)
 	 ("C-x b" . helm-buffers-list)
