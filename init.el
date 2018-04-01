@@ -13,6 +13,6 @@
 (load "~/.emacs.d/init-sections/programming-modes.el")
 (load "~/.emacs.d/init-sections/emacs-safety.el")
 (load "~/.emacs.d/init-sections/emacs-comfort.el")
-(load "~/.emacs.d/init-sections/ox.el")
+(load "~/.emacs.d/init-sections/osx.el")
 
 (provide 'init)
