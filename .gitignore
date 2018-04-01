@@ -1,7 +1,9 @@
 /auto-save-list/
 /elpa/
 /url/
+/undo/
 /savehist
+/projectile-bookmarks.eld
 
 /local.el
 /private.el
