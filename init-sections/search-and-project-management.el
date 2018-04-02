@@ -98,7 +98,9 @@
 			    (search-ring . 20)
 			    (shell-command-history . 50)
 			    tags-file-name
-			    tags-table-list))))
+			    tags-table-list))
+		  ;; I don't really know why I have this:
+		  bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks"))
   :ensure t)
 
 ;;; Project Management

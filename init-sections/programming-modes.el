@@ -17,6 +17,10 @@
   :pin melpa-stable)
 
 ;;; Javascript
+(use-package js2-mode
+  :ensure t
+  :config (setq js2-basic-offset 2))
+
 (use-package rjsx-mode
   :config (progn
 	    (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
