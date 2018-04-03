@@ -8,8 +8,7 @@
 		  undo-tree-visualizer-diff t
 		  undo-tree-auto-save-history t
 		  undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
-  :diminish undo-tree-mode
-  :ensure t)
+  :diminish undo-tree-mode)
 
 ;; Evil Mode
 (use-package evil
@@ -38,5 +37,4 @@
 	    (evil-set-initial-state 'sql-interactive-mode 'emacs)
 	    (evil-set-initial-state 'neotree-mode 'emacs)
 
-	    (evil-mode 1))
-  :ensure t)
+	    (evil-mode 1)))

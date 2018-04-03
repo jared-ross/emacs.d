@@ -15,5 +15,4 @@
 	    (add-hook 'LaTeX-mode-hook 'turn-on-cdlatex)
 	    (setq cdlatex-math-symbol-alist '((?- ("\\cap" "\\leftrightarrow" "\\longleftrightarrow"))
 					      (?p ("\\pi" "\\Pr(?)" "\\varpi")))
-		  cdlatex-paired-parens "$"))
-  :ensure t)
+		  cdlatex-paired-parens "$")))

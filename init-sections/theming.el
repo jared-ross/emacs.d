@@ -2,5 +2,4 @@
 
 (use-package leuven-theme
   :config (progn
-	    (load-theme 'leuven t t))
-  :ensure t)
+	    (load-theme 'leuven t t)))

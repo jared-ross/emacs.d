@@ -35,8 +35,7 @@
 ;;			      errors)
 ;;	      :modes (js-mode js2-mode js3-mode rjsx-mode)
 ;;	      :next-checkers ((warning . javascript-jscs))))
-	    )
-  :ensure t)
+	    ))
 
 ;;; Hippie Expand
 (global-set-key "\M- " 'hippie-expand)

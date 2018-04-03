@@ -44,5 +44,4 @@
   :bind (("C-c l" . org-store-link)
 	 ("C-c c" . org-capture)
 	 ("C-c a" . org-agenda)
-	 ("C-c b" . org-iswitchb))
-  :ensure t)
+	 ("C-c b" . org-iswitchb)))

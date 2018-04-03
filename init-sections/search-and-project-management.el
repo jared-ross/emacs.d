@@ -44,30 +44,20 @@
 	 ("C-x c Y" . helm-yas-create-snippet-on-region)
 	 ("C-x c b" . my/helm-do-grep-book-notes)
 	 ("C-x c SPC" . helm-all-mark-rings))
-  :diminish helm-mode
-  :ensure t)
+  :diminish helm-mode)
 
 (use-package helm-dash
-  :if 'helm
-  :ensure t)
+  :if 'helm)
 
-(use-package ag
-  :ensure t)
+(use-package ag)
 
-(use-package helm-ag
-  :ensure t)
+(use-package perspective)
 
-(use-package perspective
-  :ensure t)
+(use-package projectile)
 
-(use-package projectile
-  :ensure t)
+(use-package persp-projectile)
 
-(use-package persp-projectile
-  :ensure t)
-
-(use-package helm-projectile
-  :ensure t)
+(use-package helm-projectile)
 
 (use-package bookmark+
   :config (progn
@@ -100,19 +90,17 @@
 			    tags-file-name
 			    tags-table-list))
 		  ;; I don't really know why I have this:
-		  bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks"))
-  :ensure t)
+		  bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")))
+
 
 ;;; Project Management
 (use-package neotree
   :config (progn
 	      (global-set-key [f8] 'neotree-toggle))
-  :ensure t
   :pin melpa)
 
 ;;; Git
 (use-package magit
   :bind (("C-x g" . magit-status)
 	 ("C-x M-g" . magit-dispatch-popup))
-  :ensure t
   :pin melpa-stable)

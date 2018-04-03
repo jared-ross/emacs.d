@@ -9,29 +9,24 @@
 ;;; Clojure
 (use-package clojure-mode
   :config (progn
-	    (add-hook 'clojure-mode-hook #'subword-mode))
-  :ensure t)
+	    (add-hook 'clojure-mode-hook #'subword-mode)))
 
 (use-package cider
-  :ensure t
   :pin melpa-stable)
 
 ;;; Javascript
 (use-package js2-mode
-  :ensure t
   :config (setq js2-basic-offset 2))
 
 (use-package rjsx-mode
   :config (progn
 	    (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
-  :ensure t
   :pin melpa)
 
 (use-package add-node-modules-path
   :config (progn
 	    (eval-after-load 'js-mode
-	      '(add-hook 'js-mode-hook #'add-node-modules-path)))
-  :ensure t)
+	      '(add-hook 'js-mode-hook #'add-node-modules-path))))
 
 ;;; C Programming
 (setq c-default-style "linux"
