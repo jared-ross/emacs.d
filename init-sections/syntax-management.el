@@ -3,39 +3,31 @@
 ;; Fly Check
 (use-package flycheck
   :config (progn
-	    (add-hook 'prog-mode-hook #'flycheck-mode)
-	    (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-	    (setq flycheck-eslint-executable "/Users/jaredross/.nvm/versions/node/v8.0.0/bin/npx eslint")
-	    ;; (flycheck-define-checker javascript-eslint
-;;	      "A Javascript syntax and style checker using eslint.
+	    (flycheck-define-checker javascript-eslint
+	      "A Javascript syntax and style checker using eslint.
 
-;; See URL `https://github.com/eslint/eslint'."
-;;	      :command ("eslint" "--format=checkstyle"
-;;			(config-file "--config" flycheck-eslintrc)
-;;			(option "--rulesdir" flycheck-eslint-rulesdir)
-;;			;; We need to use source-inplace because eslint looks for
-;;			;; configuration files in the directory of the file being checked.
-;;			;; See https://github.com/flycheck/flycheck/issues/447
-;;			source-inplace)
-;;	      :error-parser flycheck-parse-checkstyle
-;;	      :error-filter (lambda (errors)
-;;			      (mapc (lambda (err)
-;;				      ;; Parse error ID from the error message
-;;				      (setf (flycheck-error-message err)
-;;					    (replace-regexp-in-string
-;;					     (rx " ("
-;;						 (group (one-or-more (not (any ")"))))
-;;						 ")" string-end)
-;;					     (lambda (s)
-;;					       (setf (flycheck-error-id err)
-;;						     (match-string 1 s))
-;;					       "")
-;;					     (flycheck-error-message err))))
-;;				    (flycheck-sanitize-errors (flycheck-increment-error-columns errors)))
-;;			      errors)
-;;	      :modes (js-mode js2-mode js3-mode rjsx-mode)
-;;	      :next-checkers ((warning . javascript-jscs))))
-	    ))
+See URL `http://eslint.org/'."
+	      :command ("npx" "eslint" "--format=json"
+			(option-list "--rulesdir" flycheck-eslint-rules-directories)
+			"--stdin" "--stdin-filename" source-original)
+	      :standard-input t
+	      :error-parser flycheck-parse-eslint
+	      ; Hack: fix: (flycheck-eslint-config-exists-p)
+	      :enabled (lambda () t)
+	      :modes (js-mode js-jsx-mode js2-mode js2-jsx-mode js3-mode rjsx-mode)
+	      :working-directory flycheck-eslint--find-working-directory
+	      :verify
+	      (lambda (_)
+		(let* ((default-directory
+			 (flycheck-compute-working-directory 'javascript-eslint))
+		       (have-config t))
+		  (list
+		   (flycheck-verification-result-new
+		    :label "config file"
+		    :message (if have-config "found" "missing or incorrect")
+		    :face (if have-config 'success '(bold error)))))))
+	    (add-hook 'prog-mode-hook #'flycheck-mode)
+	    (setq flycheck-disabled-checkers '(emacs-lisp-checkdoc))))
 
 ;;; Hippie Expand
 (global-set-key "\M- " 'hippie-expand)
