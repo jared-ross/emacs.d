@@ -23,11 +23,6 @@
 	    (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
   :pin melpa)
 
-(use-package add-node-modules-path
-  :config (progn
-	    (eval-after-load 'js-mode
-	      '(add-hook 'js-mode-hook #'add-node-modules-path))))
-
 ;;; C Programming
 (setq c-default-style "linux"
       c-basic-offset 4)
