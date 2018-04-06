@@ -16,7 +16,9 @@
 
 ;;; Javascript
 (use-package js2-mode
-  :config (setq js2-basic-offset 2))
+  :config (setq js2-basic-offset 2
+                js2-indent-switch-body t))
+
 
 (use-package rjsx-mode
   :config (progn
