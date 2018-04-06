@@ -16,12 +16,14 @@
 	    ;; Redefining Keys
 	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
 	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
+
+            
 	    (mapc (lambda (state)	; For some reason this only works with mapcar
 		    ;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
 		    ;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
 		    ;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
-		    ;; (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
-		    ;; (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
+		    (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
+		    (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
 		    (evil-declare-key state global-map (kbd "C-w") 'evil-delete)
 		    (evil-declare-key state global-map (kbd "C-y") 'yank)
 		    (evil-declare-key state global-map (kbd "C-k") 'kill-line))
