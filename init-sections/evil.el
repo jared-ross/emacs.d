@@ -10,6 +10,9 @@
 		  undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo"))))
   :diminish undo-tree-mode)
 
+(use-package key-chord
+  :config (key-chord-mode 1))
+
 ;; Evil Mode
 (use-package evil
   :config (progn
@@ -24,20 +27,28 @@
 		    ;; (evil-declare-key state global-map (kbd "C-d") 'evil-delete-char)
 		    (evil-declare-key state global-map (kbd "C-n") 'evil-next-line)
 		    (evil-declare-key state global-map (kbd "C-p") 'evil-previous-line)
-		    (evil-declare-key state global-map (kbd "C-w") 'evil-delete)
+		    ;(evil-declare-key state global-map (kbd "C-w") 'evil-delete)
 		    (evil-declare-key state global-map (kbd "C-y") 'yank)
 		    (evil-declare-key state global-map (kbd "C-k") 'kill-line))
 		  '(normal insert visual))
 
-	    (define-key evil-normal-state-map (kbd "q") nil)
+
+            ;; Fix the "q" key action
+	    ; (define-key evil-normal-state-map (kbd "q") nil)
+	    ; (define-key evil-normal-state-map (kbd "q") 'evil-record-macro)
+            (add-hook 'view-mode-hook 'evil-motion-state)
 
 	    ;; Fixing up certain states
 	    (evil-set-initial-state 'magit-mode 'emacs)
 	    (evil-set-initial-state 'magit-mode 'emacs)
 	    (evil-set-initial-state 'magit-popup-mode 'emacs)
-	    (evil-set-initial-state 'org-mode 'emacs)
+	    ;(evil-set-initial-state 'org-mode 'normal)
 	    (evil-set-initial-state 'sql-interactive-mode 'emacs)
 	    (evil-set-initial-state 'neotree-mode 'emacs)
+
+            ;; Enable smash escape (ie 'jk' and 'kj' quickly to exit insert mode)
+            (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
+            (key-chord-define evil-insert-state-map  "kj" 'evil-normal-state)
 
             ;; Turning on Evil mode
 	    (evil-mode 1)))

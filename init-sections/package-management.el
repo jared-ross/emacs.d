@@ -3,7 +3,8 @@
 ;; Emacs Package Management Setup
 (setq package-archives
    (quote
-    (("melpa" . "http://melpa.org/packages/")
+    (("org" . "https://orgmode.org/elpa/")
+     ("melpa" . "http://melpa.org/packages/")
      ("melpa-stable" . "http://stable.melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/"))))
 (package-initialize)

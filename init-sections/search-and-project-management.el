@@ -57,7 +57,8 @@
 
 (use-package persp-projectile)
 
-(use-package helm-projectile)
+(use-package helm-projectile
+  :if 'helm)
 
 (use-package bookmark+
   :config (progn
@@ -103,4 +104,5 @@
 (use-package magit
   :bind (("C-x g" . magit-status)
 	 ("C-x M-g" . magit-dispatch-popup))
-  :pin melpa-stable)
+  :pin melpa
+  :ensure t)

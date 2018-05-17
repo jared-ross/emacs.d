@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: check-in
+# key: ci
+# --
+**** $1
+Name: $2
+Guests: $3
+Arrival: $4
+***** TODO Inform $0

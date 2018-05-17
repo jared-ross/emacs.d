@@ -4,18 +4,20 @@
 	    (setq
 	     ;; Files
 	     org-directory "~/.org/"
-	     org-agenda-files '("~/.org/emacs.org" "~/.org/tasks.org" "~/.org/notes.org")
+	     org-agenda-files '("~/.org/emacs.org" "~/.org/tasks.org" "~/.org/notes.org" "~/.org/MA/weeks.org")
 	     org-log-done 'time
 	     org-todo-keywords
-	     '((sequence "TODO(t)" "WAIT(w@/!)" "|" "DONE(d@!)" "CANCELED(c@!)")
+	     '((sequence "TODO(t)" "WAIT(w/!)" "|" "DONE(d!)" "DEFERED(l!)" "CANCELED(c!)")
 	       (sequence "MAYBE(m)" "|" "CANCELED(c@!)"))
 	     org-startup-indented t
 	     org-special-ctrl-a/e t
+
 	     ;; Refiling
 	     org-refile-targets '((org-agenda-files :maxlevel . 9))
 	     org-outline-path-complete-in-steps nil
 	     org-refile-use-outline-path t
 	     org-refile-allow-creating-parent-nodes (quote confirm)
+
 	     ;; Capturing
 	     org-capture-templates
 	     '(("t" "Todo" entry
@@ -40,8 +42,37 @@
 		(file+headline "~/.org/emacs.org" "Captured")
 		"* %?")
 	       ("j" "Journal" entry (file+datetree "~/.org/journal.org")
-		"* %?\nEntered on %U\n  %i\n  %a"))))
+		"* %?\nEntered on %U\n  %i\n  %a"))
+                                        ; Exporting
+             org-export-with-section-numbers nil
+             org-html-include-timestamps nil
+             org-export-with-sub-superscripts nil
+             org-export-with-toc nil
+             org-html-toplevel-hlevel 2
+             org-export-htmlize-output-type 'css))
   :bind (("C-c l" . org-store-link)
 	 ("C-c c" . org-capture)
 	 ("C-c a" . org-agenda)
-	 ("C-c b" . org-iswitchb)))
+	 ("C-c b" . org-iswitchb))
+  :pin "org")
+
+;; Scratch
+
+(defun MA-day ()
+  "This doesn't add much value so far."
+  (interactive)
+  (let ((org-export-with-tasks nil)
+        (async nil)
+        (subtreep t)
+        (visible-only nil)
+        (body-only t)
+        (ext-plist
+         (list
+          :ascii-charset 'utf-8
+           :ascii-headline-spacing '(0 . 2)
+           :ascii-paragraph-spacing 'auto
+           :ascii-inner-margin 0
+           :ascii-format-inlinetask-function
+           '(lambda (a b c d e f g h i) 'nil))))
+    (org-export-to-buffer 'ascii "*MA Day*"
+      async subtreep visible-only body-only ext-plist (lambda () nil))))

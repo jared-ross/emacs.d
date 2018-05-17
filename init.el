@@ -17,7 +17,6 @@
 
 ;; General programming
 (load "~/.emacs.d/init-sections/search-and-project-management.el")
-(load "~/.emacs.d/init-sections/syntax-management.el")
 
 ;; Language Specific.
 (load "~/.emacs.d/init-sections/latex.el")
@@ -29,5 +28,8 @@
 
 (if (eq system-type 'darwin)
     (load "~/.emacs.d/init-sections/osx.el"))
+
+;; Lets try have this here, for some reason the lambda function isn't working
+(load "~/.emacs.d/init-sections/syntax-management.el")
 
 (provide 'init)
