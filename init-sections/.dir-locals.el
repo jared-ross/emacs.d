@@ -1,2 +1,2 @@
 ((nil .
-      ((flycheck-disabled-checkers . emacs-lisp-checkdoc))))
+      ((flycheck-disabled-checkers emacs-lisp-checkdoc))))
