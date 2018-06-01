@@ -6,6 +6,11 @@
 ;; Folding
 (use-package origami)
 
+(use-package async
+  :config (progn
+            (async-bytecomp-package-mode 1))
+  :ensure t)
+
 ;; Fixing window sizing
 
 ;; (use-package golden-ratio
@@ -102,3 +107,8 @@
 
 
 (put 'narrow-to-region 'disabled nil)
+
+;; Byte compileing .emacs.d
+(defun jared-recompile-emacs ()
+  (interactive)
+  (byte-recompile-directory "~/.emacs.d/" 0))
