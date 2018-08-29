@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: react-constructor
+# key: construct
+# --
+constructor(props) {
+ super(props);
+
+ this.state = {$1};$2
+}
+$0

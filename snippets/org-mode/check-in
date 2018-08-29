@@ -5,5 +5,5 @@
 **** $1
 Name: $2
 Guests: $3
-Arrival: $4
+Arrival: ${4:No time specified.}
 ***** TODO Inform $0

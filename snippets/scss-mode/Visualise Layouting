@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Visualise Layouting
+# key: layvis
+# --
+
+// Layout Building Visualisation
+body, div, section, header, nav, footer {
+background: rgba(165, 133, 88, 0.1);
+padding: .5rem;
+}
