@@ -29,4 +29,5 @@
 
 ;;; YaSnippet
 (use-package yasnippet
-  :config (progn (yas-global-mode 1)))
+  :config (progn (yas-global-mode 1))
+  :diminish yas-minor-mode)
