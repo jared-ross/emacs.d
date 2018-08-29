@@ -38,63 +38,21 @@
 	 ("C-x b" . helm-buffers-list)
 	 ("M-y" . helm-show-kill-ring)
 	 ("M-x" . helm-M-x)
-	 ("C-x c o" . helm-occur)
-	 ("C-x c s" . helm-swoop)
-	 ("C-x c y" . helm-yas-complete)
-	 ("C-x c Y" . helm-yas-create-snippet-on-region)
-	 ("C-x c b" . my/helm-do-grep-book-notes)
-	 ("C-x c SPC" . helm-all-mark-rings))
+         ;; These don't seem to work
+	 ;; ("C-x c o" . helm-occur)
+	 ;; ("C-x c s" . helm-swoop)
+	 ;; ("C-x c y" . helm-yas-complete)
+	 ;; ("C-x c Y" . helm-yas-create-snippet-on-region)
+	 ;; ("C-x c b" . my/helm-do-grep-book-notes)
+	 ;; ("C-x c SPC" . helm-all-mark-rings)
+         )
   :diminish helm-mode)
 
-(use-package helm-dash
-  :if 'helm)
+;; Project management
 
-(use-package ag)
+(use-package ag
+  :config (setq ag-highlight-search t))
 
-(use-package perspective)
-
-(use-package projectile)
-
-(use-package persp-projectile)
-
-(use-package helm-projectile
-  :if 'helm)
-
-(use-package bookmark+
-  :config (progn
-	    (setq desktop-globals-to-save
-		  (append '((comint-input-ring . 50)
-			    (compile-history . 30)
-			    desktop-missing-file-warning
-			    (dired-regexp-history . 20)
-			    (extended-command-history . 30)
-			    (face-name-history . 20)
-			    (file-name-history . 100)
-			    (grep-find-history . 30)
-			    (grep-history . 30)
-			    (ido-buffer-history . 100)
-			    (ido-last-directory-list . 100)
-			    (ido-work-directory-list . 100)
-			    (ido-work-file-list . 100)
-			    (magit-read-rev-history . 50)
-			    (minibuffer-history . 50)
-			    (org-clock-history . 50)
-			    (org-refile-history . 50)
-			    (org-tags-history . 50)
-			    (query-replace-history . 60)
-			    (read-expression-history . 60)
-			    (regexp-history . 60)
-			    (regexp-search-ring . 20)
-			    register-alist
-			    (search-ring . 20)
-			    (shell-command-history . 50)
-			    tags-file-name
-			    tags-table-list))
-		  ;; I don't really know why I have this:
-		  bmkp-last-as-first-bookmark-file "~/.emacs.d/bookmarks")))
-
-
-;;; Project Management
 (use-package neotree
   :config (progn
 	      (global-set-key [f8] 'neotree-toggle))
