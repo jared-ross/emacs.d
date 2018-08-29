@@ -1,5 +1,38 @@
 ;;;; Programming Modes
 
+;;; TypeScript
+(use-package tide
+  :ensure t
+  :config (progn
+            (defun setup-tide-mode ()
+              (interactive)
+              (tide-setup)
+              (flycheck-mode +1)
+              (setq flycheck-check-syntax-automatically '(save mode-enabled))
+              (eldoc-mode +1)
+              (tide-hl-identifier-mode +1)
+              ;; company is an optional dependency. You have to
+              ;; install it separately via package-install
+              ;; `M-x package-install [ret] company`
+              (company-mode +1))
+
+            ;; aligns annotation to the right hand side
+            (setq company-tooltip-align-annotations t)
+
+            ;; formats the buffer before saving
+            (add-hook 'before-save-hook 'tide-format-before-save)
+
+            (add-hook 'typescript-mode-hook #'setup-tide-mode)))
+
+
+;;; YAML
+(use-package yaml-mode
+  :ensure t)
+
+;;; PHP
+(use-package php-mode
+  :config (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode)))
+
 ;;; Haskell
 (use-package haskell-mode
   :config (progn
@@ -11,22 +44,27 @@
   :config (progn
 	    (add-hook 'clojure-mode-hook #'subword-mode)))
 
-(use-package cider
-  :pin melpa
-  :ensure t)
+;; ;; Turned off as there are problems with it and use-package
+;; (use-package cider
+;;   :pin melpa)
 
 (use-package multiple-cursors
   :pin melpa
   :ensure t)
 
-(use-package clj-refactor
-  :pin melpa
-  :config
-  (progn
-    (add-hook 'clojure-mode-hook
-              (lambda ()
-                (clj-refactor-mode 1)
-                (cljr-add-keybindings-with-prefix "C-c C-m")))))
+;; ;; Turned off as there are problems with it, same as cider
+;; (use-package clj-refactor
+;;   :pin melpa
+;;   :config
+;;   (progn
+;;     (add-hook 'clojure-mode-hook
+;;               (lambda ()
+;;                 (clj-refactor-mode 1)
+;;                 (cljr-add-keybindings-with-prefix "C-c C-m")))))
+
+;;; Racket
+(use-package racket-mode
+  :ensure t)
 
 ;;; Javascript
 (use-package js2-mode
@@ -55,7 +93,3 @@
 ;;; C Programming
 (setq c-default-style "linux"
       c-basic-offset 4)
-
-;; Local Variables:
-;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
-;; End:
