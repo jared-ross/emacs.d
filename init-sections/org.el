@@ -1,16 +1,24 @@
 ;;; Org Mode
 (use-package org
   :config (progn
+            (org-clock-persistence-insinuate)
+
 	    (setq
 	     ;; Files
 	     org-directory "~/.org/"
-	     org-agenda-files '("~/.org/emacs.org" "~/.org/tasks.org" "~/.org/notes.org" "~/.org/MA/weeks.org")
+	     org-agenda-files '("~/.org/emacs.org" "~/.org/tasks.org" "~/.org/notes.org" "~/.org/work.org")
 	     org-log-done 'time
+             org-log-into-drawer t
 	     org-todo-keywords
 	     '((sequence "TODO(t)" "WAIT(w/!)" "|" "DONE(d!)" "DEFERED(l!)" "CANCELED(c!)")
-	       (sequence "MAYBE(m)" "|" "CANCELED(c@!)"))
+	       (sequence "MAYBE(m)" "|" "CANCELED(c@!)")
+               (sequence "QUESTION(q!)" "|" "ANSWERED(a!)"))
 	     org-startup-indented t
 	     org-special-ctrl-a/e t
+
+             ;; Clocking
+             org-clock-idle-time 5
+             org-clock-persist t
 
 	     ;; Refiling
 	     org-refile-targets '((org-agenda-files :maxlevel . 9))
@@ -38,6 +46,12 @@
 	       ("n" "Notes" entry
 		(file+headline "~/.org/notes.org" "Unsorted")
 		"* %?")
+	       ("S" "Link with Selected Text" entry
+		(file+headline "~/.org/notes.org" "Captured Links")
+                "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
+	       ("L" "Link" entry
+		(file+headline "~/.org/notes.org" "Captured Links")
+                "* %? [[%:link][%:description]] \nCaptured On: %U")
 	       ("e" "Emacs note" entry
 		(file+headline "~/.org/emacs.org" "Captured")
 		"* %?")
