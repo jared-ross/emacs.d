@@ -1,5 +1,34 @@
 ;;; Emacs Comfort
 
+;; Dired hide listing by default
+;; (require dired+)
+
+(add-hook 'dired-mode-hook
+     (lambda ()
+       (dired-hide-details-mode)))
+
+(set-register ?w (cons 'file "/Users/jaredross/4.0 Work - Clients/JuiceBox Creative/CarGoGo"))
+
+;; (define-key dired-mode-map (kbd "`") 'jared-dired-open-term)
+
+
+(defun jared-dired-open-term ()
+  "Open an `ansi-term' that corresponds to current directory."
+  (interactive)
+  (let ((current-dir (dired-current-directory)))
+    (term-send-string
+     (ansi-term)
+     (if (file-remote-p current-dir)
+         (let ((v (tramp-dissect-file-name current-dir t)))
+           (format "ssh %s@%s\n"
+                   (aref v 1) (aref v 2)))
+       (format "cd '%s'\n" current-dir)))))
+
+
+
+;; Keep system clipboard seperate
+(setq select-enable-clipboard t)
+
 ;; Startup Screen
 (setq initial-buffer-choice "./.org/home.org")
 
@@ -49,6 +78,10 @@
 (setq eshell-smart-space-goes-to-end t)
 
 ;; Fix scrolling and bells
+
+;; Stop scrolling past the bottom
+(setq scroll-conservatively 108) ; This doesn't seem to work though...
+
 (global-set-key [wheel-right] 'ignore)	; This is because wheel-right
                                         ; takes me off screen too easily
 (global-set-key [wheel-left] 'scroll-right)
@@ -108,7 +141,13 @@
 
 (put 'narrow-to-region 'disabled nil)
 
+
 ;; Byte compileing .emacs.d
 (defun jared-recompile-emacs ()
   (interactive)
   (byte-recompile-directory "~/.emacs.d/" 0))
+
+(use-package eterm-256color)
+
+;; Turn off keeping track of installed packages automatically
+(defun package--save-selected-packages (&rest opt) nil)
