@@ -8,5 +8,5 @@
 ;; stop opening a new frame (window) for each file
 (setq ns-pop-up-frames nil)
 
-;; Org
-(add-to-list 'org-file-apps '(directory . emacs))
+;; Org -- This stopped working in 26.1
+;; (add-to-list 'org-file-apps '(directory . emacs))
