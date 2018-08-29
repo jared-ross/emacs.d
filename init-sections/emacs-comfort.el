@@ -30,7 +30,7 @@
 (setq select-enable-clipboard t)
 
 ;; Startup Screen
-(setq initial-buffer-choice "./.org/home.org")
+;; (setq initial-buffer-choice "./.org/home.org")
 
 ;; Folding
 (use-package origami)
