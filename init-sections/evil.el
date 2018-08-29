@@ -15,12 +15,14 @@
 
 ;; Evil Mode
 (use-package evil
+  :init (setq evil-want-C-u-scroll t)
   :config (progn
 	    ;; Redefining Keys
 	    (evil-declare-key 'normal global-map (kbd "C-e") 'evil-end-of-line)
 	    (evil-declare-key 'insert global-map (kbd "C-e") 'end-of-line)
+            (evil-declare-key 'normal global-map (kbd "] l") 'flycheck-next-error)
+            (evil-declare-key 'normal global-map (kbd "[ l") 'flycheck-previous-error)
 
-            
 	    (mapc (lambda (state)	; For some reason this only works with mapcar
 		    ;; (evil-declare-key state global-map (kbd "C-f") 'evil-forward-char)
 		    ;; (evil-declare-key state global-map (kbd "C-b") 'evil-backward-char)
@@ -40,11 +42,12 @@
 
 	    ;; Fixing up certain states
 	    (evil-set-initial-state 'magit-mode 'emacs)
-	    (evil-set-initial-state 'magit-mode 'emacs)
 	    (evil-set-initial-state 'magit-popup-mode 'emacs)
 	    ;(evil-set-initial-state 'org-mode 'normal)
 	    (evil-set-initial-state 'sql-interactive-mode 'emacs)
 	    (evil-set-initial-state 'neotree-mode 'emacs)
+	    (evil-set-initial-state 'haskell-interactive-mode 'emacs)
+	    (evil-set-initial-state 'haskell-error-mode 'emacs)
 
             ;; Enable smash escape (ie 'jk' and 'kj' quickly to exit insert mode)
             (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)
@@ -103,7 +106,18 @@
 
 
 (use-package evil-commentary
-  :config (evil-commentary-mode))
+  :config (evil-commentary-mode)
+  :diminish evil-commentary-mode)
 
 (use-package evil-exchange
   :config (evil-exchange-cx-install))
+
+(use-package evil-leader
+  :config (progn
+            (global-evil-leader-mode)))
+
+(use-package evil-numbers
+  :config (progn
+            (define-key evil-normal-state-map (kbd "C-c +") 'evil-numbers/inc-at-pt)
+            (define-key evil-normal-state-map (kbd "C-c -") 'evil-numbers/dec-at-pt)))
+
