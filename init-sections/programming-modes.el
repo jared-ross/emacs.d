@@ -2,7 +2,6 @@
 
 ;;; TypeScript
 (use-package tide
-  :ensure t
   :config (progn
             (defun setup-tide-mode ()
               (interactive)
@@ -26,8 +25,7 @@
 
 
 ;;; YAML
-(use-package yaml-mode
-  :ensure t)
+(use-package yaml-mode)
 
 ;;; PHP
 (use-package php-mode
@@ -49,8 +47,7 @@
 ;;   :pin melpa)
 
 (use-package multiple-cursors
-  :pin melpa
-  :ensure t)
+  :pin melpa)
 
 ;; ;; Turned off as there are problems with it, same as cider
 ;; (use-package clj-refactor
@@ -63,8 +60,7 @@
 ;;                 (cljr-add-keybindings-with-prefix "C-c C-m")))))
 
 ;;; Racket
-(use-package racket-mode
-  :ensure t)
+(use-package racket-mode)
 
 ;;; Javascript
 (use-package js2-mode

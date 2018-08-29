@@ -20,11 +20,9 @@
             (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
 
             (purpose-compile-user-configuration))
-  :ensure t
   :after (helm))
 
 (use-package ace-window
-  :config (global-set-key (kbd "M-o") 'ace-window)
-  :ensure t)
+  :config (global-set-key (kbd "M-o") 'ace-window))
 
 (setq pop-up-frames t)

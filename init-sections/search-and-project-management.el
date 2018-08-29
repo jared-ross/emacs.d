@@ -53,6 +53,8 @@
 (use-package ag
   :config (setq ag-highlight-search t))
 
+(use-package wgrep-ag)
+
 (use-package neotree
   :config (progn
 	      (global-set-key [f8] 'neotree-toggle))
@@ -62,5 +64,4 @@
 (use-package magit
   :bind (("C-x g" . magit-status)
 	 ("C-x M-g" . magit-dispatch-popup))
-  :pin melpa
-  :ensure t)
+  :pin melpa)

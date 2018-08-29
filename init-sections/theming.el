@@ -9,5 +9,4 @@
             ))
 
 ;; Experimental New Theme
-;; (use-package grayscale-theme
-;;   :ensure t)
+;; (use-package grayscale-theme)

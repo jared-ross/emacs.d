@@ -19,7 +19,6 @@
 ;; Safety Features
 (load "~/.emacs.d/init-sections/emacs-safety.el")
 
-
 ;; General Code Management
 (load "~/.emacs.d/init-sections/search-and-project-management.el")
 (load "~/.emacs.d/init-sections/window-management.el")

@@ -37,13 +37,11 @@
 
 (use-package async
   :config (progn
-            (async-bytecomp-package-mode 1))
-  :ensure t)
+            (async-bytecomp-package-mode 1)))
 
 ;; Fixing window sizing
 
 ;; (use-package golden-ratio
-;;   :ensure t
 ;;   :config (golden-ratio-mode 1)
 ;;   :diminish golden-ratio-mode)
 
