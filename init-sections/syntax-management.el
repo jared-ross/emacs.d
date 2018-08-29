@@ -35,12 +35,6 @@ See URL `http://eslint.org/'."
             ;; (add-hook 'rjsx-mode #'jared-syntax-install-eslint-checker)
             (add-hook 'prog-mode-hook #'flycheck-mode)))
 
-;;; Hippie Expand
-(global-set-key (kbd "C-M-SPC") 'hippie-expand)
-
-;;; Cycle spacing
-(global-set-key (kbd "C-c C-SPC") 'cycle-spacing)
-
 ;;; Dealing with parens
 (show-paren-mode 1)
 
@@ -51,3 +45,23 @@ See URL `http://eslint.org/'."
     ;; This seems unnessesary
     ; (setq ispell-list-command "list")
     (add-hook 'flyspell-mode-hook (lambda () (local-set-key [M-down-mouse-1] 'flyspell-correct-word)))))
+
+
+;; Company Mode
+(use-package company
+  :defer 2
+  :diminish
+  :custom
+  ;; (company-begin-commands '(self-insert-command))
+  ;; (company-idle-delay .1)
+  ;; (company-minimum-prefix-length 2)
+  ;; (company-show-numbers t)
+  (company-tooltip-align-annotations 't)
+  (global-company-mode t))
+
+;; This does not seem to work
+;; (use-package company-box
+;;   :ensure t
+;;   :after company
+;;   :diminish
+;;   :hook (company-mode . company-box-mode))
