@@ -5,8 +5,7 @@
 
 	    (setq
 	     ;; Files
-	     org-directory "~/.org/"
-	     org-agenda-files '("~/.org/emacs.org" "~/.org/tasks.org" "~/.org/notes.org" "~/.org/work.org")
+	     org-agenda-files '("emacs.org" "tasks.org" "notes.org" "work.org")
 	     org-log-done 'time
              org-log-into-drawer t
 	     org-todo-keywords
@@ -29,33 +28,33 @@
 	     ;; Capturing
 	     org-capture-templates
 	     '(("t" "Todo" entry
-		(file+headline "~/.org/tasks.org" "Tasks")
+		(file+headline "tasks.org" "Tasks")
 		"* TODO %?")
 	       ("T" "Referenced Todo" entry
-		(file+headline "~/.org/tasks.org" "Tasks")
+		(file+headline "tasks.org" "Tasks")
 		"* TODO %?\n  %i\n  %a")
 	       ("c" "Consume" entry
-		(file+headline "~/.org/tasks.org" "Consume")
+		(file+headline "tasks.org" "Consume")
 		"* MAYBE %?")
 	       ("b" "Buy" entry
-		(file+headline "~/.org/tasks.org" "Shopping")
+		(file+headline "tasks.org" "Shopping")
 		"* TODO %?")
 	       ("p" "Projects" entry
-		(file+headline "~/.org/notes.org" "Projects")
+		(file+headline "notes.org" "Projects")
 		"* MAYBE %?")
 	       ("n" "Notes" entry
-		(file+headline "~/.org/notes.org" "Unsorted")
+		(file+headline "notes.org" "Unsorted")
 		"* %?")
 	       ("S" "Link with Selected Text" entry
-		(file+headline "~/.org/notes.org" "Captured Links")
+		(file+headline "notes.org" "Captured Links")
                 "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
 	       ("L" "Link" entry
-		(file+headline "~/.org/notes.org" "Captured Links")
+		(file+headline "notes.org" "Captured Links")
                 "* %? [[%:link][%:description]] \nCaptured On: %U")
 	       ("e" "Emacs note" entry
-		(file+headline "~/.org/emacs.org" "Captured")
+		(file+headline "emacs.org" "Captured")
 		"* %?")
-	       ("j" "Journal" entry (file+datetree "~/.org/journal.org")
+	       ("j" "Journal" entry (file+datetree "journal.org")
 		"* %?\nEntered on %U\n  %i\n  %a"))
                                         ; Exporting
              org-export-with-section-numbers nil

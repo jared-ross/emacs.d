@@ -1,5 +1,9 @@
 ;;; Emacs Init file
 
+(condition-case nil
+    (load "~/.emacs.d/local.el")
+  (error nil))
+
 ;; Setting up the package management comes first.
 (load "~/.emacs.d/init-sections/package-management.el")
 

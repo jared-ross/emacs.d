@@ -19,4 +19,4 @@
 (require 'bind-key)                ;; if you use any :bind variant
 
 ;; Set all packages to auto install
-; (setq use-package-always-ensure t)
+(setq use-package-always-ensure t)

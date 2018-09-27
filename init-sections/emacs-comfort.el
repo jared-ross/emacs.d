@@ -10,7 +10,7 @@
      (lambda ()
        (dired-hide-details-mode)))
 
-(set-register ?w (cons 'file "/Users/jaredross/4.0 Work - Clients/JuiceBox Creative/CarGoGo"))
+(set-register ?h (cons 'file (concat org-directory "home.org")))
 
 ;; (define-key dired-mode-map (kbd "`") 'jared-dired-open-term)
 
@@ -33,7 +33,7 @@
 (setq select-enable-clipboard t)
 
 ;; Startup Screen
-;; (setq initial-buffer-choice "./.org/home.org")
+(setq initial-buffer-choice "~/org/home.org")
 
 ;; Folding
 (use-package origami)
