@@ -1,7 +1,7 @@
 ;;; Emacs Comfort
 
 ;; Save registers
-(desktop-save-mode)
+;; (desktop-save-mode)
 
 ;; Dired hide listing by default
 ;; (require dired+)
