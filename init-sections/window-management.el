@@ -15,6 +15,7 @@
             (add-to-list 'purpose-user-mode-purposes '(css-mode . webdev))
             (add-to-list 'purpose-user-mode-purposes '(html-mode . webdev))
             (add-to-list 'purpose-user-mode-purposes '(json-mode . webdev))
+            (add-to-list 'purpose-user-mode-purposes '(web-mode . webdev))
 
             ; [org]
             (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
