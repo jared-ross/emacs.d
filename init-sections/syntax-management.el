@@ -59,6 +59,9 @@ See URL `http://eslint.org/'."
   (company-tooltip-align-annotations 't)
   (global-company-mode t))
 
+(use-package company-quickhelp
+  :config (company-quickhelp-mode))
+
 ;; This does not seem to work
 ;; (use-package company-box
 ;;   :ensure t
