@@ -2,7 +2,7 @@
   :config (progn
             (purpose-mode)
 
-            (define-key purpose-mode-map (kbd "C-x f") nil)
+            (define-key purpose-mode-map (kbd "C-x f") 'find-file-without-purpose)
             (define-key purpose-mode-map (kbd "C-x C-f") nil)
             (define-key purpose-mode-map (kbd "C-x b") 'switch-buffer-without-purpose)
             (define-key purpose-mode-map (kbd "C-x C-b") nil)
