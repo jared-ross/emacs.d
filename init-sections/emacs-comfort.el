@@ -10,6 +10,7 @@
      (lambda ()
        (dired-hide-details-mode)))
 
+(require 'org)
 (set-register ?h (cons 'file (concat org-directory "home.org")))
 
 ;; (define-key dired-mode-map (kbd "`") 'jared-dired-open-term)
