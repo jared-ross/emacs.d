@@ -41,6 +41,7 @@
             (add-hook 'view-mode-hook 'evil-motion-state)
 
 	    ;; Fixing up certain states
+	    (evil-set-initial-state 'special-mode 'emacs)
 	    (evil-set-initial-state 'magit-mode 'emacs)
 	    (evil-set-initial-state 'magit-popup-mode 'emacs)
 	    ;(evil-set-initial-state 'org-mode 'normal)
@@ -48,6 +49,7 @@
 	    (evil-set-initial-state 'neotree-mode 'emacs)
 	    (evil-set-initial-state 'haskell-interactive-mode 'emacs)
 	    (evil-set-initial-state 'haskell-error-mode 'emacs)
+	    (evil-set-initial-state 'cider-stacktrace-mode 'emacs)
 
             ;; Enable smash escape (ie 'jk' and 'kj' quickly to exit insert mode)
             (key-chord-define evil-insert-state-map  "jk" 'evil-normal-state)

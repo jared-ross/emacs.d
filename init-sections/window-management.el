@@ -20,10 +20,13 @@
             ; [org]
             (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
 
+            ; [terminal] extensions
+            (add-to-list 'purpose-user-mode-purposes '(cider-repl-mode . edit))
+
             (purpose-compile-user-configuration))
   :after (helm))
 
 (use-package ace-window
   :config (global-set-key (kbd "M-o") 'ace-window))
 
-(setq pop-up-frames t)
+(setq pop-up-frames nil)

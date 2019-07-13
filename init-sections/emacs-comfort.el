@@ -13,6 +13,7 @@
 (require 'org)
 (set-register ?h (cons 'file (concat org-directory "home.org")))
 
+
 ;; (define-key dired-mode-map (kbd "`") 'jared-dired-open-term)
 
 
@@ -39,9 +40,14 @@
 ;; Folding
 (use-package origami)
 
+
+;; Async emacs
 (use-package async
   :config (progn
             (async-bytecomp-package-mode 1)))
+
+;; Hydra
+(use-package hydra)
 
 ;; Fixing window sizing
 

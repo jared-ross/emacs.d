@@ -15,7 +15,11 @@
 ;;; Guide Key - Show help on delay of key input
 (use-package guide-key
   :config (progn
-	    (setq guide-key/guide-key-sequence '("C-x r" "C-x 4" "C-c"))
+	    (setq guide-key/guide-key-sequence
+                  '("C-x r"
+                    "C-x 4"
+                    "C-c"
+                    "C-x"))
 	    (guide-key-mode 1))
   :diminish guide-key-mode)
 
@@ -31,3 +35,7 @@
 (use-package yasnippet
   :config (progn (yas-global-mode 1))
   :diminish yas-minor-mode)
+
+;;; Multiple Cursors
+(use-package multiple-cursors
+  :pin melpa)
