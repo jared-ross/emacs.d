@@ -107,7 +107,7 @@
 (tool-bar-mode -1)
 
 ;; Edit this config
-(global-set-key (kbd "<f12>")
+(global-set-key (kbd "C-<f12>")
                 (lambda ()
                   (interactive)
                   (find-file-other-window user-init-file)))

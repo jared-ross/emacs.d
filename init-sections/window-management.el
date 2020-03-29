@@ -21,10 +21,11 @@
             (add-to-list 'purpose-user-mode-purposes '(org-mode . org))
 
             ; [terminal] extensions
-            (add-to-list 'purpose-user-mode-purposes '(cider-repl-mode . edit))
+            (add-to-list 'purpose-user-mode-purposes '(cider-repl-mode . repl))
 
-            (purpose-compile-user-configuration))
-  :after (helm))
+            (add-to-list 'purpose-user-mode-purposes '(magit-mode . magit))
+
+            (purpose-compile-user-configuration)))
 
 (use-package ace-window
   :config (global-set-key (kbd "M-o") 'ace-window))
