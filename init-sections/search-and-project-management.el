@@ -66,15 +66,17 @@
 
 (use-package wgrep-ag)
 
+(use-package wgrep)
+
 (use-package neotree
   :config (progn
-	      (global-set-key [f8] 'neotree-toggle))
+            (global-set-key [f8] 'neotree-toggle))
   :pin melpa)
 
 ;;; Git
 (use-package magit
   :bind (("C-x g" . magit-status)
-	 ("C-x M-g" . magit-dispatch-popup))
+         ("C-x M-g" . magit-dispatch-popup))
   :config (progn
             (add-hook 'after-save-hook 'magit-after-save-refresh-status t))
   :pin melpa)

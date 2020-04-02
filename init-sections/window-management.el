@@ -22,6 +22,7 @@
 
             ; [terminal] extensions
             (add-to-list 'purpose-user-mode-purposes '(cider-repl-mode . repl))
+            (add-to-list 'purpose-user-mode-purposes '(message-buffer-mode . repl))
 
             (add-to-list 'purpose-user-mode-purposes '(magit-mode . magit))
 

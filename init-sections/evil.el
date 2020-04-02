@@ -42,6 +42,7 @@
 
 	    ;; Fixing up certain states
 	    (evil-set-initial-state 'special-mode 'emacs)
+	    (evil-set-initial-state 'dired-mode 'emacs)
 	    (evil-set-initial-state 'magit-mode 'emacs)
 	    (evil-set-initial-state 'magit-popup-mode 'emacs)
                                         ;(evil-set-initial-state 'org-mode 'normal)

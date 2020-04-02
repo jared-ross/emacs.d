@@ -3,12 +3,22 @@
 ;; Save registers
 ;; (desktop-save-mode)
 
-;; Dired hide listing by default
-;; (require dired+)
+;; Dired
+(use-package dired-single
+  :ensure t)
+
+(require 'dired)
+(put 'dired-find-alternate-file 'disabled nil) ; disables warning
+(define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
+(define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
+(define-key dired-mode-map (kbd "<backspace>") (lambda () (interactive) (find-alternate-file "..")))  ; was dired-up-directory
 
 (add-hook 'dired-mode-hook
-     (lambda ()
-       (dired-hide-details-mode)))
+          (lambda ()
+            (dired-hide-details-mode)))
+
+
+;; Org
 
 (require 'org)
 (set-register ?h (cons 'file (concat org-directory "home.org")))

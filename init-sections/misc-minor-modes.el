@@ -39,3 +39,7 @@
 ;;; Multiple Cursors
 (use-package multiple-cursors
   :pin melpa)
+
+
+;; Smart tabs
+(use-package smart-tabs-mode)
