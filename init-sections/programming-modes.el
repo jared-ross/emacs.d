@@ -104,16 +104,39 @@
 ;;; Racket
 (use-package racket-mode)
 
+
 ;;; Javascript
+
 (use-package js2-mode
-  :config (setq js2-basic-offset 2
-                js2-indent-switch-body t))
+  :config (progn
+            (setq js2-indent-switch-body t)
+            (defvaralias 'js2-basic-offset 'tab-width)
+            (defvaralias 'sgml-basic-offset 'tab-width)
+            
+            ;; Fix tabbing bug
+            (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)))
+
+(use-package xref-js2
+  :config (progn
+            (define-key js2-mode-map (kbd "M-.") nil)
+            (add-hook 'js2-mode-hook (lambda ()
+                                       (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))))
+
+(use-package js2-refactor
+  :config (progn
+            (add-hook 'js2-mode-hook #'js2-refactor-mode)
+            (js2r-add-keybindings-with-prefix "C-c C-r")))
+
 
 
 (use-package rjsx-mode
   :config (progn
-	    (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
+            (add-hook 'rjsx-mode-hook (lambda ()
+                                        (setq-local js-indent-level tab-width)
+                                        (setq-local indent-line-function 'js2-jsx-indent-line)))
+            (add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode)))
   :pin melpa)
+
 
 (use-package json-reformat
   :config (progn
@@ -128,6 +151,14 @@
 
 (use-package json-mode)
 
+
 ;;; C Programming
+
 (setq c-default-style "linux"
       c-basic-offset 4)
+
+(use-package markdown-mode
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))

@@ -4,9 +4,6 @@
 ;; (desktop-save-mode)
 
 ;; Dired
-(use-package dired-single
-  :ensure t)
-
 (require 'dired)
 (put 'dired-find-alternate-file 'disabled nil) ; disables warning
 (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file) ; was dired-advertised-find-file
@@ -40,6 +37,10 @@
        (format "cd '%s'\n" current-dir)))))
 
 
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (setq display-line-numbers 'relative)))
+
 
 ;; Keep system clipboard seperate
 (setq select-enable-clipboard t)
@@ -66,6 +67,7 @@
 ;;   :diminish golden-ratio-mode)
 
 ;; History
+(require 'savehist)
 (setq savehist-file "~/.emacs.d/savehist")
 (savehist-mode 1)
 (setq history-length t)
@@ -86,11 +88,25 @@
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
-    (if mark-active (list (region-beginning) (region-end))
-      (list (line-beginning-position)
-        (line-beginning-position 2)))))
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
+
+;; Term
+(require 'term)
+(global-set-key (kbd "C-x C-`") (lambda ()
+                                  (interactive)
+                                  (term "/bin/bash")))
+
+(use-package eterm-256color
+  :config (add-hook 'term-mode-hook #'eterm-256color-mode))
+
+
+
 
 ;; EShell
+
+(require 'eshell)
 (setq eshell-where-to-jump 'begin)
 (setq eshell-review-quick-commands nil)
 (setq eshell-smart-space-goes-to-end t)
@@ -123,6 +139,7 @@
                   (find-file-other-window user-init-file)))
 
 ;;; Fixing Re-builder
+(require 're-builder)
 (setq reb-re-syntax 'string)
 
 ;; Renaming Current file
