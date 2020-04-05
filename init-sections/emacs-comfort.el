@@ -1,5 +1,9 @@
 ;;; Emacs Comfort
 
+;; Exec Path From Shell
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 ;; Save registers
 ;; (desktop-save-mode)
 

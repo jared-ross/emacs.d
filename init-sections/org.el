@@ -48,14 +48,17 @@
 	       ("S" "Link with Selected Text" entry
 		(file+headline "notes.org" "Captured Links")
                 "* %^{Title}\nSource: %u, %c\n #+BEGIN_QUOTE\n%i\n#+END_QUOTE\n\n\n%?")
-	       ("L" "Link" entry
-		(file+headline "notes.org" "Captured Links")
-                "* %? [[%:link][%:description]] \nCaptured On: %U")
 	       ("e" "Emacs note" entry
 		(file+headline "emacs.org" "Captured")
 		"* %?")
 	       ("j" "Journal" entry (file+datetree "journal.org")
-		"* %?\nEntered on %U\n  %i\n  %a"))
+		"* %?\nEntered on %U\n  %i\n  %a")
+
+               ;; Work
+
+	       ("w" "Link" entry
+		(file+headline "work.org" "Captured")
+                "* %? \nCaptured On: %U"))
                                         ; Exporting
              org-export-with-section-numbers nil
              org-html-include-timestamps nil

@@ -148,6 +148,29 @@
                         (setq evil-shift-width 2)))))
 
 
+(use-package nodejs-repl
+  :config (progn
+            (defun node-repl-jack-in ()
+              (interactive)
+              (define-key js-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-expression)
+              (define-key js-mode-map (kbd "C-c C-j") 'nodejs-repl-send-line)
+              (define-key js-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+              (define-key js-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
+              (define-key js-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)
+              (nodejs-repl))
+            (defun nvm-which ()
+              (let* ((shell (concat (getenv "SHELL") " -l -c 'nvm which'"))
+                     (output (shell-command-to-string shell)))
+                (message output)
+                (cadr (split-string output "[\n]+" t))))
+            (setq nodejs-repl-command #'nvm-which)))
+
+(defun nvm-which ()
+  (let* ((shell (concat (getenv "SHELL") " -l -c 'nvm which'"))
+         (output (shell-command-to-string shell)))
+    (cadr (split-string output "[\n]+" t))))
+(setq nodejs-repl-command #'nvm-which)
+
 
 (use-package json-mode)
 
